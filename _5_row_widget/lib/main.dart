@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: Scaffold(
-        appBar: AppBar(title: Text("Row Widget"),),
+        appBar: AppBar(title: Text("Row Widget")),
         body: Row(
           // الخصائص الأساسية لعنصر Row:
           // mainAxisAlignment: تحديد محاذاة العناصر أفقياً (على المحور الرئيسي)
@@ -47,8 +47,7 @@ class MyApp extends StatelessWidget {
             Icon(Icons.favorite, color: Colors.red),
           ],
         ),
-        ),
+      ),
     );
   }
 }
-
