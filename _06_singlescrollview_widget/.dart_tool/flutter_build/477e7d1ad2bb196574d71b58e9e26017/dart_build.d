@@ -1,0 +1,1 @@
+ C:\\Users\\Kyrillos\\Desktop\\Flutter\ Tutorials\\Flutter-Tutorial\\_6_singlescrollview_widget\\.dart_tool\\flutter_build\\477e7d1ad2bb196574d71b58e9e26017\\dart_build_result.json: 

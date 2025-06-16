@@ -1,0 +1,1 @@
+ C:\\Users\\Kyrillos\\Desktop\\Flutter\ Tutorials\\_1_text_widget\\.dart_tool\\flutter_build\\08bc53c461407e3fe5461cda3e960464\\dart_build_result.json: 

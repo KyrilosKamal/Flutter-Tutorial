@@ -1,0 +1,1 @@
+ C:\\Users\\Kyrillos\\Desktop\\Flutter\ Tutorials\\Flutter-Tutorial\\_3_image_widget\\.dart_tool\\flutter_build\\d3883112aeef25a4d76a7efaefb0a64a\\native_assets.json: 
