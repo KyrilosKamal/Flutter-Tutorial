@@ -52,10 +52,10 @@ class MyApp extends StatelessWidget {
             mouseCursor:
                 SystemMouseCursors.click, // شكل مؤشر الفأرة عند المرور فوق الزر
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all(
                 Colors.white,
               ), // لون خلفية الزر
-              elevation: MaterialStateProperty.all(2), // ارتفاع الزر (الظل)
+              elevation: WidgetStateProperty.all(2), // ارتفاع الزر (الظل)
             ), // نمط الزر (متوفر في Flutter 3.7+)
           ),
         ),
