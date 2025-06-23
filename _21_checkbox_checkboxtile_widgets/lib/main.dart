@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -55,10 +55,10 @@ class _MyAppState extends State<MyApp> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ), // شكل المربع
-                fillColor: MaterialStateProperty.all(
+                fillColor: WidgetStateProperty.all(
                   Colors.yellow,
                 ), // لون تعبئة المربع حسب الحالة
-                overlayColor: MaterialStateProperty.all(
+                overlayColor: WidgetStateProperty.all(
                   Colors.purple,
                 ), // لون التراكب عند الضغط أو المرور
                 isError: false, // هل هناك خطأ (يغير لون الحدود)
@@ -101,10 +101,10 @@ class _MyAppState extends State<MyApp> {
                 focusNode: null, // عقدة التركيز (FocusNode)
                 hoverColor: Colors.green, // لون الخلفية عند المرور بالفأرة
                 splashRadius: 20.0, // نصف قطر تأثير الضغط
-                fillColor: MaterialStateProperty.all(
+                fillColor: WidgetStateProperty.all(
                   Colors.yellow,
                 ), // لون تعبئة المربع حسب الحالة
-                overlayColor: MaterialStateProperty.all(
+                overlayColor: WidgetStateProperty.all(
                   Colors.purple,
                 ), // لون التراكب عند الضغط أو المرور
                 mouseCursor:
