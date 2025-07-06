@@ -62,6 +62,8 @@ Flutter-Tutorials/
 ├── _31_time_picker/
 ├── _32_dismissible/
 ├── _33_toast_snackbar/
+├── _34_show_dialog/
+├── _35_show_buttom_sheet_and_snackbar/
 └── README.md                             
     </pre>
   </div>
