@@ -226,7 +226,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
 
-            Center(child: pages.elementAt(selectedIndex)),
           ],
         ),
       ),
