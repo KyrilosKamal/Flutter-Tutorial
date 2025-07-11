@@ -46,11 +46,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [
-      Center(child: Text('Home Page')),
-      Center(child: Text('Search Page')),
-      Center(child: Text('Profile Page')),
-    ];
+
     int selectedIndex = 0;
 
     return Scaffold(
