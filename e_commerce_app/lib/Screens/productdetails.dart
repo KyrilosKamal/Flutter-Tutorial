@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ItemDetails extends StatefulWidget {
   final Product data;
-  const ItemDetails({Key? key, required this.data}) : super(key: key);
+  const ItemDetails({super.key, required this.data});
 
   @override
   _ItemDetailsState createState() => _ItemDetailsState(product: data);
@@ -58,7 +58,7 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
       body: ListView(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Column(
               children: [

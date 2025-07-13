@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         currentIndex: selectedIndex,
         onTap: (value) {
           setState(() {
-            selectedIndex = value; // تحديث مؤشر العنصر الحالي
+            selectedIndex = value; 
           });
         },
         type: BottomNavigationBarType.fixed,
