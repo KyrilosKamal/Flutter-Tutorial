@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -41,85 +39,154 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// شرح كامل لـ SearchDelegate وجميع خصائصه في Flutter
+
 class MySearchDelegate extends SearchDelegate {
-  List usernames = [
-    "Alice",
-    "Bob",
-    "Charlie",
-    "David",
-    "Eve",
-    "Frank",
-    "Grace",
-    "Heidi",
-    "Ivan",
-    "Judy",
-    "Kevin",
-    "Liam",
-    "Mia",
-    "Noah",
-    "Olivia",
-    "Peter",
-    "Quinn",
-    "Rachel",
-    "Sam",
-    "Tina",
-    "Uma",
-    "Victor",
-    "Wendy",
-    "Xavier",
-    "Yara",
-    "Zoe",
+  // قائمة البيانات التي سيتم البحث فيها
+  final List<String> usernames = [
+    "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Heidi",
+    "Ivan", "Judy", "Kevin", "Liam", "Mia", "Noah", "Olivia", "Peter",
+    "Quinn", "Rachel", "Sam", "Tina", "Uma", "Victor", "Wendy", "Xavier",
+    "Yara", "Zoe",
   ];
-  List? filteredList;
+
+  // يمكنك استخدام هذه الخاصية لتخزين نتائج البحث المؤقتة
+  List<String>? filteredList;
+
+  /// خاصية searchFieldLabel:
+  /// تتيح لك تخصيص النص الظاهر داخل مربع البحث (Placeholder)
   @override
-  List<Widget>? buildActions(BuildContext context) {
+  String get searchFieldLabel => 'ابحث عن اسم مستخدم';
+
+  /// خاصية searchFieldStyle:
+  /// لتخصيص نمط النص داخل مربع البحث
+  @override
+  TextStyle? get searchFieldStyle => const TextStyle(color: Colors.deepPurple);
+
+  /// خاصية keyboardType:
+  /// لتحديد نوع لوحة المفاتيح (نص، رقم، بريد إلكتروني...)
+  @override
+  TextInputType? get keyboardType => TextInputType.text;
+
+  /// خاصية textInputAction:
+  /// لتحديد زر الإجراء في لوحة المفاتيح (بحث، إرسال...)
+  @override
+  TextInputAction get textInputAction => TextInputAction.search;
+
+  /// دالة buildActions:
+  /// تبني أزرار الإجراءات في شريط البحث (يمين)، مثل زر المسح أو الميكروفون
+  @override
+  List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
+        icon: const Icon(Icons.clear),
         onPressed: () {
           if (query.isNotEmpty) {
-            query = "";
+            query = '';
           } else {
-            close(context, null);
+            close(context, '');
           }
         },
-        icon: Icon(Icons.close),
       ),
     ];
   }
 
+  /// دالة buildLeading:
+  /// تبني زر العودة (يسار شريط البحث)، غالباً زر الرجوع
   @override
-  Widget? buildLeading(BuildContext context) {
+  Widget buildLeading(BuildContext context) {
     return IconButton(
-      onPressed: () {
-        close(context, null);
-      },
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => close(context, ''),
     );
   }
 
+  /// دالة buildResults:
+  /// تبني واجهة نتائج البحث عند الضغط على زر البحث أو اختيار اقتراح
   @override
   Widget buildResults(BuildContext context) {
-    return Text("");
+    final results = usernames
+        .where((element) => element.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    if (results.isEmpty) {
+      return Center(child: Text('لا توجد نتائج لـ "$query"'));
+    }
+
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(results[index]),
+        onTap: () => close(context, results[index]),
+      ),
+    );
   }
 
+  /// دالة buildSuggestions:
+  /// تبني قائمة الاقتراحات أثناء الكتابة في مربع البحث
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (query.isEmpty) {
-      return ListView.builder(
-        itemCount: usernames.length,
-        itemBuilder: (context, index) =>
-            ListTile(title: Text('${usernames[index]}')),
-      );
-    } else {
-      filteredList = usernames
-          .where((elements) => elements.contains(query))
-          .toList();
-      return ListView.builder(
-        itemCount: filteredList!.length,
-        itemBuilder: (context, index) =>
-            ListTile(title: Text('${filteredList![index]}')),
-      );
-    }
+    final suggestions = query.isEmpty
+        ? usernames
+        : usernames
+            .where((element) => element.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) => ListTile(
+        leading: Icon(Icons.person),
+        title: Text(suggestions[index]),
+        onTap: () {
+          query = suggestions[index];
+          showResults(context);
+        },
+      ),
+    );
+  }
+
+  /// خاصية appBarTheme:
+  /// لتخصيص مظهر شريط البحث (الألوان، الخطوط...)
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final theme = Theme.of(context);
+    return theme.copyWith(
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        hintStyle: TextStyle(color: Colors.white70),
+        border: InputBorder.none,
+      ),
+      textTheme: theme.textTheme.copyWith(
+        titleLarge: const TextStyle(color: Colors.white, fontSize: 18),
+      ),
+    );
+  }
+
+  /// خاصية query:
+  /// النص الحالي في مربع البحث (يمكنك تعديله مباشرة)
+  /// مثال: query = 'اسم جديد';
+
+  /// خاصية transitionAnimation:
+  /// للتحكم في حركة الانتقال بين الاقتراحات والنتائج (Animation)
+
+  /// دالة showResults(context):
+  /// تعرض نتائج البحث بناءً على النص الحالي
+
+  /// دالة close(context, result):
+  /// تغلق واجهة البحث وتعيد النتيجة المختارة
+
+  /// دالة showSuggestions(context):
+  /// تعرض الاقتراحات مرة أخرى
+
+  /// دالة onQueryChanged(newQuery):
+  /// تستدعى عند تغيير نص البحث (مفيدة للبحث الديناميكي أو جلب بيانات من API)
+  @override
+  void showResults(BuildContext context) {
+    super.showResults(context);
+    // يمكنك تنفيذ منطق إضافي هنا إذا أردت
   }
 }
 
